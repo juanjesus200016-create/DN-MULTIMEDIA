@@ -10,7 +10,7 @@ const els={
   fav:document.getElementById('favBtn'), fit:document.getElementById('fitToggle'),
   del:document.getElementById('deleteBtn'), gallery:document.getElementById('gallery'),
   add:document.getElementById('addBtn'), picker:document.getElementById('filePicker'),
-  stage:document.getElementById('stage'),
+  stage:document.getElementById('stage'), full:document.getElementById('fullBtn'),
 };
 
 async function load(){
@@ -93,6 +93,15 @@ els.add.onclick=()=>els.picker.click();
 els.picker.onchange=async()=>{
   for(const f of els.picker.files){try{await addFile(f,'image')}catch(e){console.error(e)}}
   els.picker.value=''; await load();
+};
+
+/* NUEVO: Pantalla Completa */
+els.full.onclick=()=>{
+  if(document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    els.stage.requestFullscreen?.().catch(()=>{});
+  }
 };
 
 /* Gestos: swipe (nav) + pinch (zoom) */

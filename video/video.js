@@ -1,8 +1,9 @@
 const state={files:[],index:-1,url:null,skip:10,brightness:1,loop:'none',
-  g:null,gs:null,seekTarget:null,cues:[],ccOn:false};
+  g:null,gs:null,seekTarget:null,cues:[],ccOn:false, uiVisible:true};
 
 const video=document.getElementById('video');
 const stage=document.getElementById('stage');
+const videoUI=document.getElementById('videoUI');
 const els={
   seek:document.getElementById('seek'), cur:document.getElementById('curTime'),
   dur:document.getElementById('durTime'), play:document.getElementById('playVid'),
@@ -33,7 +34,7 @@ async function loadVideo(i,autoplay=true){
   if(state.url)URL.revokeObjectURL(state.url);
   state.url=URL.createObjectURL(f.blob);
   video.src=state.url;
-  video.style.filter=`brightness(${state.brightness})`; // mantiene el brillo elegido
+  video.style.filter=`brightness(${state.brightness})`;
   els.name.textContent=f.name;
   els.counter.textContent=`${i+1} / ${state.files.length}`;
   els.fav.textContent=f.favorite?'♥':'♡';
@@ -81,7 +82,6 @@ video.addEventListener('ended',()=>{
 
 els.rate.onchange=()=>{video.playbackRate=parseFloat(els.rate.value)};
 
-/* EL CAMBIO ESTÁ AQUÍ: Solicitamos pantalla completa para TODO el main, no solo el stage */
 els.full.onclick=()=>{
   const mainPlayer = document.querySelector('.video-main');
   if(document.fullscreenElement) {
@@ -108,6 +108,19 @@ els.picker.onchange=async()=>{
   for(const f of els.picker.files){try{await addFile(f,'video')}catch(e){console.error(e)}}
   els.picker.value='';await load();
 };
+
+/* NUEVO: AUTO-PIP AL SALIR DE LA APP */
+document.addEventListener('visibilitychange', async () => {
+  if (document.visibilityState === 'hidden' && !video.paused && document.pictureInPictureEnabled) {
+    try {
+      if (!document.pictureInPictureElement) {
+        await video.requestPictureInPicture();
+      }
+    } catch (e) {
+      console.log('Auto-PiP bloqueado por el sistema', e);
+    }
+  }
+});
 
 /* ===== Gestos (toque único) ===== */
 stage.addEventListener('touchstart',e=>{
@@ -151,8 +164,11 @@ stage.addEventListener('touchend',()=>{
     els.hudR.classList.remove('show');
     els.hudC.classList.remove('show');
   },600);
+  
+  // NUEVO: Toque sin mover los dedos oculta/muestra la UI
   if(state.g&&!wasMoved){
-    video.paused?video.play().catch(()=>{}):video.pause();
+    state.uiVisible = !state.uiVisible;
+    videoUI.classList.toggle('ui-hidden', !state.uiVisible);
   }
   state.g=null;state.gs=null;
 });
