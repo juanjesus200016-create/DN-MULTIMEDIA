@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Fotos · MediaPlay</title>
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#0b1020">
+<link rel="stylesheet" href="../shared/common.css">
+<link rel="stylesheet" href="photos.css">
+</head>
+<body>
+<header class="app-header">
+  <a href="../index.html" class="icon-btn">←</a>
+  <h1>🖼️ Fotos</h1>
+  <button id="addBtn" class="icon-btn">＋</button>
+</header>
+
+<main class="photos-main">
+  <div id="stage" class="stage"><img id="photo" alt="" draggable="false"></div>
+  <div class="photos-hud">
+    <button id="prevBtn" class="nav-btn">◀</button>
+    <div class="photo-info">
+      <div id="photoName" class="photo-name">—</div>
+      <div id="photoCounter" class="photo-counter">0 / 0</div>
+    </div>
+    <button id="nextBtn" class="nav-btn">▶</button>
+  </div>
+</main>
+
+<section class="photos-toolbar">
+  <label class="tool">
+    <span>⏱</span>
+    <input type="number" id="timerSec" min="1" max="60" value="5">
+    <span class="tool-label">s</span>
+  </label>
+  <button id="playToggle" class="tool-btn">▶ Auto</button>
+  <button id="favBtn" class="tool-btn">♡ Favorito</button>
+  <button id="fitToggle" class="tool-btn">Ajustar</button>
+  <button id="deleteBtn" class="tool-btn danger">🗑</button>
+</section>
+
+<section class="photos-list-wrap">
+  <h2>Galería</h2>
+  <div id="gallery" class="gallery"></div>
+</section>
+
+<input type="file" id="filePicker" multiple hidden accept="image/*">
+<script src="../shared/db.js"></script>
+<script src="../shared/utils.js"></script>
+<script src="photos.js"></script>
+</body>
+</html>

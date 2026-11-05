@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Audio · MediaPlay</title>
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#0b1020">
+<link rel="stylesheet" href="../shared/common.css">
+<link rel="stylesheet" href="audio.css">
+</head>
+<body>
+<header class="app-header">
+  <a href="../index.html" class="icon-btn">←</a>
+  <h1>🎵 Audio</h1>
+  <button id="eqToggle" class="icon-btn" title="Ecualizador">🎛</button>
+</header>
+
+<main class="audio-main">
+  <div class="cover">🎵</div>
+  <div id="trackTitle" class="track-title">Sin pista</div>
+  <div id="trackSub" class="track-sub">—</div>
+
+  <div class="seek-wrap">
+    <input type="range" id="seek" min="0" max="100" value="0" step="0.01">
+    <div class="time-row">
+      <span id="curTime">0:00</span>
+      <span id="durTime">0:00</span>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="shuffleBtn" class="ctrl-btn" title="Aleatorio">🔀</button>
+    <button id="prevBtn" class="ctrl-btn">⏮</button>
+    <button id="playBtn" class="ctrl-btn big">▶</button>
+    <button id="nextBtn" class="ctrl-btn">⏭</button>
+    <button id="loopBtn" class="ctrl-btn" title="Bucle">🔁</button>
+  </div>
+
+  <div class="extras">
+    <label class="mini"><span>Vel</span>
+      <select id="rateSelect">
+        <option value="0.5">0.5x</option><option value="0.75">0.75x</option>
+        <option value="1" selected>1x</option><option value="1.25">1.25x</option>
+        <option value="1.5">1.5x</option><option value="2">2x</option>
+      </select>
+    </label>
+    <button id="favBtn" class="ctrl-btn small">♡</button>
+    <button id="addBtn" class="ctrl-btn small">＋</button>
+  </div>
+</main>
+
+<section class="playlist-wrap">
+  <div class="pl-head"><h2>Lista</h2>
+    <button id="clearPl" class="link-btn">Vaciar</button></div>
+  <ul id="playlist" class="playlist"></ul>
+</section>
+
+<div id="eqPanel" class="eq-panel" hidden>
+  <div class="eq-head"><h3>Ecualizador</h3>
+    <button id="eqClose" class="icon-btn">✕</button></div>
+  <div id="eqBands" class="eq-bands"></div>
+  <div class="eq-foot"><button id="eqReset" class="tool-btn">Reset</button></div>
+</div>
+
+<audio id="audio" hidden></audio>
+<input type="file" id="filePicker" multiple hidden
+       accept="audio/*,.mp3,.flac,.m4a,.opus,.ogg,.wav,.aac">
+<script src="../shared/db.js"></script>
+<script src="../shared/utils.js"></script>
+<script src="audio.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Video · MediaPlay</title>
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#000">
+<link rel="stylesheet" href="../shared/common.css">
+<link rel="stylesheet" href="video.css">
+</head>
+<body class="video-body">
+<header class="app-header">
+  <a href="../index.html" class="icon-btn">←</a>
+  <h1>🎞️ Video</h1>
+  <button id="addBtn" class="icon-btn">＋</button>
+</header>
+
+<main class="video-main">
+  <div id="stage" class="video-stage">
+    <video id="video" playsinline></video>
+    <div class="overlay">
+      <div id="hudLeft" class="hud hud-left"></div>
+      <div id="hudRight" class="hud hud-right"></div>
+      <div id="hudCenter" class="hud hud-center"></div>
+    </div>
+    <div id="subtitle" class="subtitle" hidden></div>
+  </div>
+
+  <div class="seek-row">
+    <input type="range" id="seek" min="0" max="100" value="0" step="0.01">
+    <div class="time-row">
+      <span id="curTime">0:00</span><span id="durTime">0:00</span>
+    </div>
+  </div>
+
+  <div class="video-controls">
+    <button id="skipBack" class="ctrl-btn">⏪<span id="skipBackLabel">10</span></button>
+    <button id="prevVid" class="ctrl-btn">⏮</button>
+    <button id="playVid" class="ctrl-btn big">▶</button>
+    <button id="nextVid" class="ctrl-btn">⏭</button>
+    <button id="skipFwd" class="ctrl-btn">⏩<span id="skipFwdLabel">10</span></button>
+  </div>
+
+  <div class="video-extras">
+    <button id="loopBtn" class="ctrl-btn small">🔁</button>
+    <label class="mini"><span>Vel</span>
+      <select id="rateSel">
+        <option value="0.25">0.25x</option><option value="0.5">0.5x</option>
+        <option value="0.75">0.75x</option><option value="1" selected>1x</option>
+        <option value="1.25">1.25x</option><option value="1.5">1.5x</option>
+        <option value="2">2x</option>
+      </select>
+    </label>
+    <button id="ccBtn" class="ctrl-btn small" title="Subtítulos">CC</button>
+    <button id="fullBtn" class="ctrl-btn small" title="Pantalla completa">⛶</button>
+    <button id="pipBtn" class="ctrl-btn small" title="Picture in Picture">PiP</button>
+    <button id="favVid" class="ctrl-btn small">♡</button>
+  </div>
+
+  <div class="video-info">
+    <span id="vidName" class="video-name">Sin video</span>
+    <span id="vidCounter" class="video-counter">0 / 0</span>
+  </div>
+
+  <button id="loadSub" class="link-btn" style="margin-top:8px">Cargar subtítulos (.vtt/.srt)</button>
+</main>
+
+<input type="file" id="filePicker" multiple hidden accept="video/*,.mp4,.webm,.mkv,.mov,.m4v,.avi">
+<input type="file" id="subtitleFile" accept=".vtt,.srt" hidden>
+<script src="../shared/db.js"></script>
+<script src="../shared/utils.js"></script>
+<script src="video.js"></script>
+</body>
+</html>

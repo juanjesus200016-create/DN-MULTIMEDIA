@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>MediaPlay</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b1020">
+<link rel="stylesheet" href="shared/common.css">
+<link rel="stylesheet" href="lobby.css">
+</head>
+<body>
+<header class="app-header">
+  <h1>🎬 MediaPlay</h1>
+  <button id="installBtn" class="ghost-btn" hidden>Instalar</button>
+</header>
+
+<main class="lobby">
+  <a class="tile" href="photos/photos.html">
+    <span class="tile-icon">🖼️</span>
+    <span class="tile-title">Fotos</span>
+    <span class="tile-sub">Carrusel · Favoritos · Zoom</span>
+  </a>
+  <a class="tile" href="audio/audio.html">
+    <span class="tile-icon">🎵</span>
+    <span class="tile-title">Audio</span>
+    <span class="tile-sub">Playlist · EQ · Loop · Shuffle</span>
+  </a>
+  <a class="tile" href="video/video.html">
+    <span class="tile-icon">🎞️</span>
+    <span class="tile-title">Video</span>
+    <span class="tile-sub">Gestos · Velocidad · Subtítulos</span>
+  </a>
+</main>
+
+<section class="block">
+  <h2>Reciente</h2>
+  <div id="recentList" class="hscroll"><div class="empty">Aún no hay medios</div></div>
+</section>
+
+<section class="block">
+  <h2>Lista de reproducción</h2>
+  <div id="quickPlaylist" class="hscroll"><div class="empty">Sin pistas</div></div>
+</section>
+
+<footer class="lobby-footer">
+  <button id="addMediaBtn" class="primary-btn">+ Añadir medios</button>
+</footer>
+
+<input type="file" id="filePicker" multiple hidden
+       accept="image/*,audio/*,video/*,.mkv,.flac,.m4a,.opus,.ogg,.wav,.avi,.mov">
+
+<script src="shared/db.js"></script>
+<script src="shared/utils.js"></script>
+<script src="lobby.js"></script>
+</body>
+</html>
