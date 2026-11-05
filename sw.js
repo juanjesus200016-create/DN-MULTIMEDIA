@@ -1,4 +1,4 @@
-const CACHE='mediaplay-v1';
+const CACHE='mediaplay-v2';
 const PRECACHE=[
   './','./index.html','./lobby.css','./lobby.js','./manifest.json',
   './shared/common.css','./shared/db.js','./shared/utils.js',

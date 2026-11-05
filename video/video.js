@@ -81,10 +81,16 @@ video.addEventListener('ended',()=>{
 
 els.rate.onchange=()=>{video.playbackRate=parseFloat(els.rate.value)};
 
+/* EL CAMBIO ESTÁ AQUÍ: Solicitamos pantalla completa para TODO el main, no solo el stage */
 els.full.onclick=()=>{
-  if(document.fullscreenElement)document.exitFullscreen();
-  else stage.requestFullscreen?.().catch(()=>{});
+  const mainPlayer = document.querySelector('.video-main');
+  if(document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    mainPlayer.requestFullscreen?.().catch(()=>{});
+  }
 };
+
 els.pip.onclick=async()=>{
   if(!document.pictureInPictureEnabled){alert('PiP no disponible');return;}
   try{
@@ -103,12 +109,7 @@ els.picker.onchange=async()=>{
   els.picker.value='';await load();
 };
 
-/* ===== Gestos (toque único) =====
-   - 35% izq: brightness vertical
-   - 35% der: volume vertical
-   - 30% centro: seek horizontal (se aplica al levantar el dedo)
-   - Tap simple: play/pause (si no hubo gesto)
-*/
+/* ===== Gestos (toque único) ===== */
 stage.addEventListener('touchstart',e=>{
   if(e.touches.length!==1)return;
   const t=e.touches[0], r=stage.getBoundingClientRect();
